@@ -18,7 +18,52 @@ module.exports = function (grunt) {
       },
     },
 
+    babel2: {
+      options: {
+        sourceMap: false,
+        presets: [['@babel/preset-env', { "modules": false }]]
+      },
+      dist: {
+        files: [
+          {
+            expand: true,
+            cwd: './web/webroot/_ui/desktop/common/philipsUI/src/js/es6/',
+            src: ['*.js'],
+            dest: './web/webroot/_ui/desktop/common/philipsUI/src/js/es6_converted/'
+          }
+        ]
+      },
+    },
+
     browserify: {
+      dist: {
+        files: [
+          [
+            {
+              expand: true,
+              cwd: './src',
+              src: ['*.js'],
+              dest: './dist'
+            }
+          ]
+        ],
+        options: {
+          browserifyOptions: { debug: true },
+          transform: [
+            [
+              "babelify",
+              {
+                presets: ["es2015", "stage-3"],
+              },
+            ],
+          ],
+          plugin: [
+            ["minifyify", { map: false }],
+          ],
+      }
+    }
+  },
+    browserify_org: {
       production: {
         src: ["./src/index.js"],
         dest: "./dist/main.js",
@@ -48,12 +93,12 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: ["src/**/*.js"],
-        tasks: ["babel", "browserify:production"],
+        tasks: ["babel", "browserify"],
       },
     },
   });
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-babel");
   grunt.loadNpmTasks("grunt-browserify");
-  grunt.registerTask("default", ["browserify:production"]);
+  grunt.registerTask("default", ["browserify"]);
 };
