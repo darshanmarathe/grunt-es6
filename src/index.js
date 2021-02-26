@@ -1,4 +1,4 @@
-import { log, getName, Boot } from "./common/";
+import { log, getName, Boot, allAddresses  } from "./common/";
 log("Do Somrhing");
 
 let item = 20;
@@ -30,3 +30,5 @@ log(num)
 log(getName("<b style='color:red'>darshan</b>", "narayan", "marathe"));
 
 Boot();
+
+log(typeof allAddresses)

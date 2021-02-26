@@ -28,11 +28,24 @@ module.exports = function (grunt) {
         files: [
           {
             expand: true,
-            cwd: './web/webroot/_ui/desktop/common/philipsUI/src/js/es6/',
+            cwd: '../src/js/es6/',
             src: ['*.js'],
-            dest: './web/webroot/_ui/desktop/common/philipsUI/src/js/es6_converted/'
+            dest: '../src/js/es6_converted/'
           }
         ]
+      },
+    },
+    uglify: {
+      minify: {
+        options: {
+          compress: true,
+          sourceMap: false
+        },
+        files: {
+          './dist/index.min.js': [
+            './dist/index.js'
+          ]
+        }
       },
     },
 
@@ -61,9 +74,9 @@ module.exports = function (grunt) {
           plugin: [
             ["minifyify", { map: false }],
           ],
+        }
       }
-    }
-  },
+    },
     browserify_org: {
       production: {
         src: ["./src/index.js"],
@@ -101,5 +114,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-babel");
   grunt.loadNpmTasks("grunt-browserify");
-  grunt.registerTask("default", ["browserify"]);
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.registerTask("default", ["browserify" , "uglify"]);
 };
