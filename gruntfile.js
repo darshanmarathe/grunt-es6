@@ -1,6 +1,7 @@
 const babelify = require("babelify");
 module.exports = function (grunt) {
   "use strict";
+  
   grunt.initConfig({
     babel: {
       options: {
