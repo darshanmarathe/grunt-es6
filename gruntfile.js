@@ -19,30 +19,41 @@ module.exports = function (grunt) {
     },
 
     browserify: {
-      dist: {
-        files: {
-          // destination for transpiled js : source js
-          "dist/main.js": "src/index.js",
-        },
+      production: {
+        src: ["./src/index.js"],
+        dest: "./dist/main.js",
         options: {
+          browserifyOptions: { debug: true },
           transform: [
-            ["babelify", { presets: ["@babel/preset-env", "es2015"] }],
+            [
+              "babelify",
+              {
+                presets: ["es2015", "stage-3"],
+                //plugins: ["@babel/plugin-transform-react-jsx"],
+              },
+            ],
           ],
-          browserifyOptions: {
-            debug: true,
-          },
+          plugin: [
+            // [
+            //   "factor-bundle",
+            //   {
+            //     outputs: ["./dist/index.js"],
+            //   },
+            // ],
+            ["minifyify", { map: false }],
+          ],
         },
       },
     },
     watch: {
       scripts: {
         files: ["src/**/*.js"],
-        tasks: ["babel", "browserify"],
+        tasks: ["babel", "browserify:production"],
       },
     },
   });
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-babel");
   grunt.loadNpmTasks("grunt-browserify");
-  grunt.registerTask("default", ["babel", "browserify"]);
+  grunt.registerTask("default", ["browserify:production"]);
 };

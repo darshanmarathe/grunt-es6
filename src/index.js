@@ -1,7 +1,7 @@
-import { log , getName } from './common/index.js'
+import { log, getName, Boot } from "./common/";
 log("Do Somrhing");
 
-let item = 20
+let item = 20;
 log(item);
 
 const str = `this is new item ${item}`;
@@ -15,17 +15,18 @@ let nullcol = obj.Somrhing ?? 'do something null col'
 log(nullcol)
 */
 
-const reverseStr = str => str.split('').reverse().join('');
+const reverseStr = (str) => str.split("").reverse().join("");
 
-
-log(str.split('').reverse().join(''))
-const arr = [1,2,3,4];
+log(str.split("").reverse().join(""));
+const arr = [1, 2, 3, 4];
 arr.map((x) => {
-    log(x);
+  log(x);
 });
 
 /*
 var num = 1_000_000_000 ;
 log(num)
 */
-log(getName('darshan' , 'narayan' , 'marathe'))
+log(getName("<b style='color:red'>darshan</b>", "narayan", "marathe"));
+
+Boot();

@@ -1,6 +1,8 @@
-//import {html } from 'lit-html'
-const html = require('lit-html').html;
+//import { html } from "lit-html";
+//const html = require('lit-html').html;
 
-export const getName = (fname, mname , lnane) => {
-  return html`${fname} ${mname} ${lname}`
-}
+import $ from "jquery";
+export const getName = (fname, mname, lname) => {
+  let ret = $("<div></div").html(`${fname} ${mname} ${lname}`).html();
+  return ret;
+};
