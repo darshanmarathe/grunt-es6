@@ -6,3 +6,6 @@ export const getName = (fname, mname, lname) => {
   let ret = $("<div></div").html(`${fname} ${mname} ${lname}`).html();
   return ret;
 };
+
+
+

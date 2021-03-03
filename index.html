@@ -13,14 +13,33 @@
         padding: 10px;
       }
     </style>
+    <!-- Load the polyfills first -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.5.0/webcomponents-bundle.min.js"
+      integrity="sha512-Kt1Gzhfbv7yVV/nPoaphcvK6EcOE3Lj8aly2lyrCf6ov6RSu0K+2fppkolTfh2E9YphyXCx5NEffMFo4dLJQOA=="
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="/components/index.js"></script>
   </head>
   <body>
     <h1>Hello</h1>
     <div id="log"></div>
 
+    <h1>Webcompoennts</h1>
+    <ph-Card
+      name="Darshan Marathe"
+      address="304 c samrat swastik"
+      id="namePanel"
+    ></ph-Card>
+
     <div id="root"></div>
-    <!--Morden browsers-->
 
     <script src="/dist/index.min.js"></script>
+
+    <script>
+      setTimeout(function () {
+        document.querySelector("#namePanel").name = "Darshan N. Marathe";
+      }, 4000);
+    </script>
   </body>
 </html>

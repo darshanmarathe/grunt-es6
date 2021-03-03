@@ -1,4 +1,5 @@
-import { log, getName, Boot, allAddresses  } from "./common/";
+import { log, getName, Boot, allAddresses, Hatchback } from "./common/";
+
 log("Do Somrhing");
 
 let item = 20;
@@ -31,4 +32,6 @@ log(getName("<b style='color:red'>darshan</b>", "narayan", "marathe"));
 
 Boot();
 
-log(typeof allAddresses)
+log(typeof allAddresses);
+
+log(new Hatchback().drive());

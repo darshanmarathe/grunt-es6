@@ -1,6 +1,7 @@
 const babelify = require("babelify");
 module.exports = function (grunt) {
   "use strict";
+
   grunt.initConfig({
     babel: {
       options: {
@@ -21,30 +22,28 @@ module.exports = function (grunt) {
     babel2: {
       options: {
         sourceMap: false,
-        presets: [['@babel/preset-env', { "modules": false }]]
+        presets: [["@babel/preset-env", { modules: false }]],
       },
       dist: {
         files: [
           {
             expand: true,
-            cwd: '../src/js/es6/',
-            src: ['*.js'],
-            dest: '../src/js/es6_converted/'
-          }
-        ]
+            cwd: "../src/js/es6/",
+            src: ["*.js"],
+            dest: "../src/js/es6_converted/",
+          },
+        ],
       },
     },
     uglify: {
       minify: {
         options: {
           compress: true,
-          sourceMap: false
+          sourceMap: false,
         },
         files: {
-          './dist/index.min.js': [
-            './dist/index.js'
-          ]
-        }
+          "./dist/index.min.js": ["./dist/index.js"],
+        },
       },
     },
 
@@ -54,11 +53,11 @@ module.exports = function (grunt) {
           [
             {
               expand: true,
-              cwd: './src',
-              src: ['*.js'],
-              dest: './dist'
-            }
-          ]
+              cwd: "./src",
+              src: ["*.js"],
+              dest: "./dist",
+            },
+          ],
         ],
         options: {
           browserifyOptions: { debug: true },
@@ -67,14 +66,14 @@ module.exports = function (grunt) {
               "babelify",
               {
                 presets: ["es2015", "stage-3"],
+                plugins: [["transform-decorators-legacy"]],
+                sourceMaps: true,
               },
             ],
           ],
-          plugin: [
-            ["minifyify", { map: false }],
-          ],
-        }
-      }
+          plugin: [["minifyify", { map: false }]],
+        },
+      },
     },
     browserify_org: {
       production: {
@@ -113,6 +112,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-babel");
   grunt.loadNpmTasks("grunt-browserify");
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.registerTask("default", ["browserify" , "uglify"]);
+  grunt.loadNpmTasks("grunt-contrib-uglify");
+  grunt.registerTask("default", ["browserify", "uglify"]);
 };
