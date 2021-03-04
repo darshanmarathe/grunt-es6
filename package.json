@@ -5,14 +5,15 @@
   "main": "gruntfile.js",
   "scripts": {
     "start": "rimraf dist & grunt",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "babel src/jsx/index.jsx --out-file src/compiled.jsx"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.8.0",
+    "@babel/core": "^7.8.0",
     "@babel/plugin-transform-react-jsx": "^7.12.17",
-    "babel-cli": "^6.6.5",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
     "babelify": "^7.2.0",

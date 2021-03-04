@@ -11,9 +11,9 @@ module.exports = function (grunt) {
         files: [
           {
             expand: true,
-            cwd: "src",
-            src: ["**/*.js"],
-            dest: "dist",
+            cwd: "jsx/",
+            src: ["**/*.js", "**/*.jsx"],
+            dest: "src/bundle",
           },
         ],
       },
@@ -67,7 +67,8 @@ module.exports = function (grunt) {
             [
               "babelify",
               {
-                presets: ["es2015", "stage-3"],
+                babelrc: false,
+                presets: ["es2015", "stage-3"]
               },
             ],
           ],
@@ -115,5 +116,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-babel");
   grunt.loadNpmTasks("grunt-browserify");
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.registerTask("default", ["browserify" , "uglify"]);
+  grunt.registerTask("default", ["babel" , "browserify" , "uglify"]);
 };
