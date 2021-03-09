@@ -2,7 +2,7 @@
 
 import { BootJSX } from "./bundle/index";
 
-// log("Do Somrhing");
+//log("Do Somrhing");
 
 // let item = 20;
 // log(item);
@@ -34,6 +34,4 @@ import { BootJSX } from "./bundle/index";
 
 // Boot();
 
-// log(typeof allAddresses)
-
-BootJSX(window.state)
+window.BootJSX = BootJSX;

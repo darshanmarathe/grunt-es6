@@ -13,24 +13,49 @@
         padding: 10px;
       }
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script async src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2Ces5%2Ces6%2Ces7%2CObject.entries"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <script
+      async
+      src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2Ces5%2Ces6%2Ces7%2CObject.entries"
+    ></script>
   </head>
   <body>
-    <h1>Hello</h1>
     <div id="log"></div>
+    <h3>Orders</h3>
+    <hr />
+    <ul>
+      <li><a href="/index.html?type=orders&id=1">1</a></li>
+      <li><a href="/index.html?type=orders&id=2">2</a></li>
+      <li><a href="/index.html?type=orders&id=3">3</a></li>
+      <li><a href="/index.html?type=orders&id=4">4</a></li>
+    </ul>
 
     <div id="root"></div>
     <!--Morden browsers-->
 
     <script>
+      $(function () {
+        let url = new URLSearchParams(window.location.search);
+        let type = url.get("type");
+        let id = url.get("id");
 
-      var state  ='{ "name" : "Darshan Marathe.", "items" : [1, 2, 3 , 4],"showItems" : true}';
-
-      state = JSON.parse(state);
+        if (type == null) return;
+        $.get(`http://localhost:3000/${type}/${id}`).then((e) => {
+          BootJSX(e);
+        });
+      });
     </script>
-    <script src="/dist/index.min.js"></script>
+    <script src="/dist/index.js"></script>
   </body>
 </html>
