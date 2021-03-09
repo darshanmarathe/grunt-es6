@@ -1,5 +1,4 @@
-import { createElement, createFragment } from "../mact";
-
+import { dom, Fragment } from "../mact/index.js";
 const Item = (props) => {
   return (
     <li

@@ -1,6 +1,6 @@
-import { createElement, createFragment } from "./mact";
+import { dom, Fragment, JSXComponent } from "./mact/index.js";
 
-import { Item } from "./components/Ítem";
+import { Item } from "./components/Item";
 
 const initState = {
   state: {},
@@ -15,18 +15,6 @@ const initState = {
     }
   },
 };
-
-const Stateful = function (state) {
-  return function (component) {
-    return component.bind(state);
-  };
-};
-
-const stateFul = Stateful(initState);
-
-const basicComponent = stateFul((props) => {
-  return <span>basicComponent {this.state.name} </span>;
-});
 
 const OrderHistoryContaier = (props) => {
   initState.state = { ...props };
@@ -47,7 +35,7 @@ const OrderHistoryContaier = (props) => {
   };
   return (
     <div>
-      <OrderHistorySearch name={props.name} search={search} />
+      <OrderHistorySearchV2 name={props.name} search={search} />
       <div>
         <button class="btn" onClick={ToggleList}>
           Toggle With JQuery
@@ -63,7 +51,6 @@ const OrderHistoryContaier = (props) => {
           <spam> {props.DisplayName != null ? props.DisplayName : ""}</spam>
         </>
 
-        <basicComponent />
         {props.showItems ? (
           <ItemList items={props.items} clicked={clicked} />
         ) : (
@@ -85,6 +72,7 @@ const ItemList = (props) => {
 };
 
 function SetCaretAtEnd(elem) {
+  if (elem === null) return;
   var elemLen = elem.value.length;
   // For IE Only
   if (document.selection) {
@@ -105,31 +93,28 @@ function SetCaretAtEnd(elem) {
     elem.focus();
   } // if
 }
-const debounce = (func, delay) => {
-  let inDebounce;
-  return function () {
-    const context = this;
-    const args = arguments;
-    clearTimeout(inDebounce);
-    inDebounce = setTimeout(() => func.apply(context, args), delay);
-  };
+
+const isTextSelected = (input) => {
+  if (!input) return false;
+  var selecttxt = "";
+  if (window.getSelection) {
+    selecttxt = window.getSelection();
+  } else if (document.getSelection) {
+    selecttxt = document.getSelection();
+  } else if (document.selection) {
+    selecttxt = document.selection.createRange().text;
+  }
+
+  if (selecttxt == "") {
+    return false;
+  }
+  return true;
 };
 
-function memoize(func) {
-  var memo = {};
-  var slice = Array.prototype.slice;
-
-  return function () {
-    var args = slice.call(arguments);
-
-    if (args in memo) return memo[args];
-    else return (memo[args] = func.apply(this, args));
-  };
-}
-const OrderHistorySearch = memoize((props) => {
+function OrderHistorySearch(props) {
   setTimeout(() => {
     SetCaretAtEnd(document.querySelector("#search"));
-  }, 50);
+  }, 150);
 
   return (
     <input
@@ -145,10 +130,53 @@ const OrderHistorySearch = memoize((props) => {
           },
         });
       }}
-      //}, 500)}
     />
   );
-});
+}
+
+function debounce(func, wait, immediate) {
+  var timeout;
+
+  return function executedFunction() {
+    var context = this;
+    var args = arguments;
+
+    var later = function () {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+
+    var callNow = immediate && !timeout;
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(later, wait);
+
+    if (callNow) func.apply(context, args);
+  };
+}
+
+class OrderHistorySearchV2 extends JSXComponent {
+  render(props) {
+    setTimeout(() => {
+      SetCaretAtEnd(document.querySelector("#search"));
+    }, 10);
+    return (
+      <input
+        id="search"
+        type="search"
+        placeholder="search something"
+        style={{ width: "100%" }}
+        value={props.name}
+        onKeyUp={debounce(function (e) {
+          if (!isTextSelected(e)) {
+            props.search(e);
+          }
+        }, 500)}
+      />
+    );
+  }
+}
 
 export const BootJSX = (props, container = "root") => {
   document.getElementById(container).innerHTML = "";
