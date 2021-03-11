@@ -43,7 +43,28 @@ const actions = {
       initState.setState({ todos: [...todos] });
     });
   },
+  HandleChange(todo){
+    var settings = {
+      url: "http://localhost:3000/todos/" + todo.id,
+      method: "PUT",
+      timeout: 0,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(todo),
+    };
 
+    $.ajax(settings).done((response) => {
+      let todos = initState.state.todos.map((x) => {
+        if (x.id == response.id) {
+          return response;
+        } else {
+          return x;
+        }
+      });
+      initState.setState({ todos: [...todos] });
+    });
+  },
   HandleAdd(e) {
     var obj = {};
     obj.title = e.target.value;
@@ -64,6 +85,17 @@ const actions = {
       alert("saved....");
     });
   },
+  HandleOpenClose(todo){
+    todo.isOpen = !todo.isOpen;
+    let todos = initState.state.todos.map((x) => {
+      if (x.id == todo.id) {
+        return todo;
+      } else {
+        return x;
+      }
+    });
+    initState.setState({ todos: [...todos] });    
+  }
 };
 
 export default actions;

@@ -15,7 +15,6 @@ const Todo = (props) => {
   }
 
   function Done_Click(todo) {
-    console.log("todo", todo);
     initState.actions.HandleDone(todo);
   }
 
@@ -40,6 +39,7 @@ const Todo = (props) => {
         <button
           onClick={(e) => {
             $("#" + props.id + "div").slideToggle();
+            initState.actions.HandleOpenClose(props);
           }}
         >
           ...
@@ -47,7 +47,17 @@ const Todo = (props) => {
       )}
       <br />
       {props.desc && (
-        <div id={props.id + "div"} style={{ display: "none" }}>
+        <div onBlur={(e) => {
+          var todo = {
+            id : props.id,
+            desc : e.target.innerHTML,
+            isOpen : true
+          }
+          
+          initState.actions.HandleChange(
+            todo);
+
+        }} contentEditable="true" id={props.id + "div"} style={{ display: props.isOpen ? "block" : "none" }}>
           {props.desc}
         </div>
       )}

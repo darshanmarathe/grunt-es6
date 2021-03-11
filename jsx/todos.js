@@ -15,7 +15,7 @@ function FetchTodos() {
 export const BootTodo = (props, container = "root") => {
   if (initState.state.todos.length === 0) {
     FetchTodos().then((d) => {
-      initState.state.todos = d;
+      initState.state.todos = initState.transformToVM(d);
       document.getElementById(container).innerHTML = "";
       document
         .getElementById(container)
