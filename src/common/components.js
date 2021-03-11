@@ -77,9 +77,9 @@ const Gallery = (data, children) => {
   let { images } = data;
   return `<ul>
         ${images.map(
-          (i) =>
-            `<li>  <img onclick="components.SayApple(event)" src="${i}" alt="Apple" /> </li>`
-        )}
+    (i) =>
+      `<li>  <img onclick="components.SayApple(event)" src="${i}" alt="Apple" /> </li>`
+  )}
         <ul/>
         `;
 };

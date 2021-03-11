@@ -5,15 +5,15 @@ module.exports = function (grunt) {
   grunt.initConfig({
     babel: {
       options: {
-        sourceMap: true,
+        sourceMap: "both",
       },
       dist: {
         files: [
           {
             expand: true,
-            cwd: "src",
-            src: ["**/*.js"],
-            dest: "dist",
+            cwd: "jsx/",
+            src: ["**/*.js", "**/*.jsx"],
+            dest: "src/bundle",
           },
         ],
       },
@@ -65,6 +65,8 @@ module.exports = function (grunt) {
             [
               "babelify",
               {
+                sourceMaps: true,
+                babelrc: false,
                 presets: ["es2015", "stage-3"],
                 plugins: [["transform-decorators-legacy"]],
                 sourceMaps: true,
@@ -85,8 +87,8 @@ module.exports = function (grunt) {
             [
               "babelify",
               {
+                sourceMaps: true,
                 presets: ["es2015", "stage-3"],
-                //plugins: ["@babel/plugin-transform-react-jsx"],
               },
             ],
           ],
@@ -104,7 +106,7 @@ module.exports = function (grunt) {
     },
     watch: {
       scripts: {
-        files: ["src/**/*.js"],
+        files: ["src/**/*.js", "jsx/**/*.js", "jsx/**/*.jsx"],
         tasks: ["babel", "browserify"],
       },
     },
@@ -113,5 +115,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-babel");
   grunt.loadNpmTasks("grunt-browserify");
   grunt.loadNpmTasks("grunt-contrib-uglify");
+<<<<<<< HEAD
   grunt.registerTask("default", ["browserify", "uglify"]);
+=======
+  grunt.registerTask("default", ["babel", "browserify"]);
+>>>>>>> jsx_render
 };

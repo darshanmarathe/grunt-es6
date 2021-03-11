@@ -1,37 +1,51 @@
+<<<<<<< HEAD
 import { log, getName, Boot, allAddresses, Hatchback } from "./common/";
 
 log("Do Somrhing");
+=======
+//import { log, getName, Boot, allAddresses  } from "./common/";
+>>>>>>> jsx_render
 
-let item = 20;
-log(item);
+// import { BootJSX } from "./bundle/index";
+import { BootTodo } from "./bundle/todos.js";
+//log("Do Somrhing");
 
-const str = `this is new item ${item}`;
-log(str);
+// let item = 20;
+// log(item);
 
-/*
-let obj = {};
+// const str = `this is new item ${item}`;
+// log(str);
 
-let nullcol = obj.Somrhing ?? 'do something null col'
+// /*
+// let obj = {};
 
-log(nullcol)
-*/
+// let nullcol = obj.Somrhing ?? 'do something null col'
 
-const reverseStr = (str) => str.split("").reverse().join("");
+// log(nullcol)
+// */
 
-log(str.split("").reverse().join(""));
-const arr = [1, 2, 3, 4];
-arr.map((x) => {
-  log(x);
-});
+// const reverseStr = (str) => str.split("").reverse().join("");
 
-/*
-var num = 1_000_000_000 ;
-log(num)
-*/
-log(getName("<b style='color:red'>darshan</b>", "narayan", "marathe"));
+// log(str.split("").reverse().join(""));
+// const arr = [1, 2, 3, 4];
+// arr.map((x) => {
+//   log(x);
+// });
 
-Boot();
+// /*
+// var num = 1_000_000_000 ;
+// log(num)
+// */
+// log(getName("<b style='color:red'>darshan</b>", "narayan", "marathe"));
 
+<<<<<<< HEAD
 log(typeof allAddresses);
 
 log(new Hatchback().drive());
+=======
+// Boot();
+
+//window.BootJSX = BootJSX;
+
+window.BootTodo = BootTodo;
+>>>>>>> jsx_render

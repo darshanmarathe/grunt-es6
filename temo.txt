@@ -1,0 +1,10 @@
+
+Agenda
+
+Quick recap
+    grunt 
+    JSX 
+
+Component communication 
+Top To bottom (Data)
+Bottom to Top (Events(Event_Data))
