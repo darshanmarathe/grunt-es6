@@ -1,6 +1,6 @@
-import { dom, Fragment, JSXComponent } from "./mact/index.js";
-
-import { Item } from "./components/Item";
+import HelpLabel from "./components/HelpLabel.js";
+import ItemList from "./components/ItemList.js";
+import { dom, Fragment } from "./mact/index";
 
 const initState = {
   state: {},
@@ -11,19 +11,23 @@ const initState = {
     if (func == null) {
       BootJSX(this.state);
     } else {
-      func(obj);
+      console.log(func, "func");
+      dom(func, obj);
     }
   },
 };
 
 const OrderHistoryContaier = (props) => {
+  console.log("OrderHistoryContaier");
   initState.state = { ...props };
   let clicked = (item) => {
     alert(item);
   };
   let search = (e) => {
-    console.log(e, "e");
-    initState.setState({ name: e.target.value });
+    initState.setState({
+      items: e.target.value.replace(/ /g, "").split(""),
+      name: e.target.value,
+    });
   };
 
   let ToggleList = (e) => {
@@ -33,41 +37,33 @@ const OrderHistoryContaier = (props) => {
 
     $("#list").slideToggle(1000);
   };
+
+  let HanleAdd = (e, func) => {
+    initState.setState({ items: [...props.items, ...[4, 5, 6, 7]] }, func);
+  };
   return (
     <div>
-      <OrderHistorySearchV2 name={props.name} search={search} />
+      <OrderHistorySearch
+        placeholder="my name is darshan"
+        name={props.name}
+        search={search}
+      />
       <div>
+        <HelpLabel helpText="Hello Darshan" />
         <button class="btn" onClick={ToggleList}>
           Toggle With JQuery
         </button>
-        <h3>
-          Example heading <span class="label label-default">New</span>
-        </h3>
-        <p>This is a paragraph in a fragment</p>
-        <>
-          <h1>Hello {props.name}</h1>
 
-          <hr />
-          <spam> {props.DisplayName != null ? props.DisplayName : ""}</spam>
-        </>
+        <h2>{props.name}</h2>
 
+        <spam> {props.DisplayName != null ? props.DisplayName : ""}</spam>
         {props.showItems ? (
-          <ItemList items={props.items} clicked={clicked} />
+          <ItemList HanleAdd={HanleAdd} items={props.items} clicked={clicked} />
         ) : (
           <></>
         )}
       </div>
     </div>
-  );
-};
-
-const ItemList = (props) => {
-  return (
-    <ul id="list">
-      {props.items.map((item) => (
-        <Item clicked={props.clicked} item={item}></Item>
-      ))}
-    </ul>
   );
 };
 
@@ -112,25 +108,28 @@ const isTextSelected = (input) => {
 };
 
 function OrderHistorySearch(props) {
+  console.log("OrderHistorySearch");
   setTimeout(() => {
     SetCaretAtEnd(document.querySelector("#search"));
-  }, 150);
+  }, 10);
 
   return (
-    <input
-      id="search"
-      type="search"
-      placeholder="search something"
-      value={props.name}
-      onKeyUp={function (e) {
-        let val = e.target.value;
-        props.search({
-          target: {
-            value: val,
-          },
-        });
-      }}
-    />
+    <>
+      {props.name}
+      <br />
+      <input
+        id="search"
+        type="search"
+        placeholder={props.placeholder ? props.placeholder : "Search Some"}
+        style={{ width: "100%" }}
+        value={props.name}
+        onKeyUp={debounce(function (e) {
+          if (!isTextSelected(e)) {
+            props.search(e);
+          }
+        }, 500)}
+      />
+    </>
   );
 }
 
@@ -156,24 +155,27 @@ function debounce(func, wait, immediate) {
   };
 }
 
-class OrderHistorySearchV2 extends JSXComponent {
+class OrderHistorySearchV2 {
   render(props) {
     setTimeout(() => {
       SetCaretAtEnd(document.querySelector("#search"));
     }, 10);
     return (
-      <input
-        id="search"
-        type="search"
-        placeholder="search something"
-        style={{ width: "100%" }}
-        value={props.name}
-        onKeyUp={debounce(function (e) {
-          if (!isTextSelected(e)) {
-            props.search(e);
-          }
-        }, 500)}
-      />
+      <>
+        {props.name}
+        <input
+          id="search"
+          type="search"
+          placeholder="search something"
+          style={{ width: "100%" }}
+          value={props.name}
+          onKeyUp={debounce(function (e) {
+            if (!isTextSelected(e)) {
+              props.search(e);
+            }
+          }, 500)}
+        />
+      </>
     );
   }
 }

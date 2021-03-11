@@ -1,7 +1,7 @@
 //import { log, getName, Boot, allAddresses  } from "./common/";
 
-import { BootJSX } from "./bundle/index";
-
+// import { BootJSX } from "./bundle/index";
+import { BootTodo } from "./bundle/todos.js";
 //log("Do Somrhing");
 
 // let item = 20;
@@ -34,4 +34,6 @@ import { BootJSX } from "./bundle/index";
 
 // Boot();
 
-window.BootJSX = BootJSX;
+//window.BootJSX = BootJSX;
+
+window.BootTodo = BootTodo;

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Todos Application</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Todos (5)</h1>
+      <input type="text" placeholder="Please add todo and hit Enter." />
+      <hr />
+      <ul class="todos">
+        <li>Lorem ipsum dolor sit amet. <button>X</button></li>
+        <li>Est tempora veritatis maxime minima? <button>X</button></li>
+        <li>Consequatur sint iusto cupiditate ratione! <button>X</button></li>
+        <li>Natus eaque culpa neque reprehenderit! <button>X</button></li>
+        <li>Tenetur quod voluptas libero doloremque? <button>X</button></li>
+      </ul>
+    </div>
+
+    <div id="data"></div>
+
+    <script>
+      $(function () {
+        BootTodo({}, "app");
+      });
+    </script>
+    <script src="/dist/index.js"></script>
+  </body>
+</html>

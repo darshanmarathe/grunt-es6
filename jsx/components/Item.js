@@ -1,4 +1,4 @@
-import { dom, Fragment } from "../mact/index.js";
+import { dom, Fragment } from "../mact";
 const Item = (props) => {
   return (
     <li
@@ -11,4 +11,4 @@ const Item = (props) => {
   );
 };
 
-export { Item };
+export default Item;
