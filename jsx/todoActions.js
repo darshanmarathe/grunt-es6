@@ -70,9 +70,10 @@ const actions = {
   },
   HandleAdd(e) {
     var obj = {};
-    obj.title = e.target.value;
+    obj.title = e.str;
     obj.done = false;
     obj.desc = "";
+    obj.date = e.date;
     console.log(obj);
     var settings = {
       url: "http://localhost:3000/todos",

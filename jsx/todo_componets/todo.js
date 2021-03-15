@@ -1,5 +1,5 @@
 import { dom, Fragment, memoize } from "../mact/index.js";
-
+import moment from 'moment'
 import { initState } from "./index";
 // Todo Component
 const Todo = (props) => {
@@ -21,6 +21,8 @@ const Todo = (props) => {
   return (
     <li>
       {props.done === true ? <del> {renderTodo()} </del> : renderTodo()}
+     <br />
+      {moment(props.date).format("MMM Do YY")}
       <button
         onClick={(e) => {
           Delete_Click(props.id);
