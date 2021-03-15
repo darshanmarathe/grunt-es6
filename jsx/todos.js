@@ -3,14 +3,8 @@ import { dom, Fragment } from "./mact/index.js";
 import { Container } from "./todo_componets/index";
 
 import initState from "./todo_componets/initialstate";
-function FetchTodos() {
-  const url = "http://localhost:3000/todos";
-  return new Promise((resolve, reject) => {
-    $.get(url).then((d) => {
-      resolve(d);
-    });
-  });
-}
+
+import FetchTodos from "./todo_componets/api";
 
 export const BootTodo = (props, container = "root") => {
   if (initState.state.todos.length === 0) {

@@ -1,4 +1,7 @@
 import { initState } from "./todo_componets/index";
+
+import FetchTodos from "./todo_componets/api";
+
 const actions = {
   HandleDelete(id) {
     var settings = {
@@ -43,7 +46,7 @@ const actions = {
       initState.setState({ todos: [...todos] });
     });
   },
-  HandleChange(todo){
+  HandleChange(todo) {
     var settings = {
       url: "http://localhost:3000/todos/" + todo.id,
       method: "PUT",
@@ -69,6 +72,7 @@ const actions = {
     var obj = {};
     obj.title = e.target.value;
     obj.done = false;
+    obj.desc = "";
     console.log(obj);
     var settings = {
       url: "http://localhost:3000/todos",
@@ -82,10 +86,10 @@ const actions = {
 
     $.ajax(settings).done((response) => {
       initState.setState({ todos: [...initState.state.todos, response] });
-      alert("saved....");
+      toastr.success("saved....");
     });
   },
-  HandleOpenClose(todo){
+  HandleOpenClose(todo) {
     todo.isOpen = !todo.isOpen;
     let todos = initState.state.todos.map((x) => {
       if (x.id == todo.id) {
@@ -94,8 +98,15 @@ const actions = {
         return x;
       }
     });
-    initState.setState({ todos: [...todos] });    
-  }
+    initState.setState({ todos: [...todos] });
+  },
+  More() {
+    let { page, pageSize, todos } = initState.state;
+    page = page + 1;
+    FetchTodos(page, pageSize).then((d) => {
+      initState.setState({ page, todos: [...todos, ...d] });
+    });
+  },
 };
 
 export default actions;

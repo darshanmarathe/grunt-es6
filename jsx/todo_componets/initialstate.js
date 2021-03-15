@@ -1,10 +1,11 @@
 import actions from "../todoActions";
 
-
 const initState = {
   state: {
     todos: [],
     placeholderText: "Enter a todo and hit enter",
+    page: 1,
+    pageSize: 3,
   },
   setState: function (obj, func = null) {
     this.state = { ...this.state, ...obj };
@@ -12,8 +13,8 @@ const initState = {
     BootTodo(this.state, "app");
   },
   transformToVM: function (data) {
-    data.forEach(todo => {
-      todo.isOpen = false
+    data.forEach((todo) => {
+      todo.isOpen = false;
     });
     return data;
   },

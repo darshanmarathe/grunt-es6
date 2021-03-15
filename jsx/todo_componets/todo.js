@@ -1,4 +1,4 @@
-import { dom, Fragment } from "../mact/index.js";
+import { dom, Fragment, memoize } from "../mact/index.js";
 
 import { initState } from "./index";
 // Todo Component
@@ -35,7 +35,7 @@ const Todo = (props) => {
       >
         {props.done == true ? "undone" : "done"}
       </button>
-      {props.desc && (
+      {props.desc != null && (
         <button
           onClick={(e) => {
             $("#" + props.id + "div").slideToggle();
@@ -46,18 +46,21 @@ const Todo = (props) => {
         </button>
       )}
       <br />
-      {props.desc && (
-        <div onBlur={(e) => {
-          var todo = {
-            id : props.id,
-            desc : e.target.innerHTML,
-            isOpen : true
-          }
-          
-          initState.actions.HandleChange(
-            todo);
+      {props.desc != null && (
+        <div
+          onBlur={(e) => {
+            var todo = {
+              id: props.id,
+              desc: e.target.innerHTML,
+              isOpen: true,
+            };
 
-        }} contentEditable="true" id={props.id + "div"} style={{ display: props.isOpen ? "block" : "none" }}>
+            initState.actions.HandleChange(todo);
+          }}
+          contentEditable="true"
+          id={props.id + "div"}
+          style={{ display: props.isOpen ? "block" : "none" }}
+        >
           {props.desc}
         </div>
       )}
@@ -65,4 +68,4 @@ const Todo = (props) => {
   );
 };
 
-export default Todo;
+export default memoize(Todo);

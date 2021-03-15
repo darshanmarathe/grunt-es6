@@ -1,6 +1,7 @@
 import { dom, Fragment } from "../mact/index.js";
 
 import { Todo } from "./index";
+import initState from "./initialstate.js";
 
 // TodoList Component
 const TodoList = (props) => {
@@ -12,6 +13,7 @@ const TodoList = (props) => {
           return <Todo {...x} {...props} />;
         })}
       </ul>
+      <button onClick={initState.actions.More}>More ...</button>
     </>
   );
 };
