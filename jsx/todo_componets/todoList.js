@@ -2,7 +2,7 @@ import { dom, Fragment } from "../mact/index.js";
 
 import { Todo } from "./index";
 import initState from "./initialstate.js";
-
+const i18n  = initState.translations();
 // TodoList Component
 const TodoList = (props) => {
   console.log(props);
@@ -13,7 +13,7 @@ const TodoList = (props) => {
           return <Todo {...x} {...props} />;
         })}
       </ul>
-      <button onClick={initState.actions.More}>More ...</button>
+      <button onClick={initState.actions.More}>{i18n("moreBtn")}</button>
     </>
   );
 };

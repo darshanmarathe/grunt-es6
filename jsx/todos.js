@@ -7,6 +7,7 @@ import initState from "./todo_componets/initialstate";
 import FetchTodos from "./todo_componets/api";
 
 export const BootTodo = (props, container = "root") => {
+  initState.initTranslations();
   if (initState.state.todos.length === 0) {
     FetchTodos().then((d) => {
       initState.state.todos = initState.transformToVM(d);

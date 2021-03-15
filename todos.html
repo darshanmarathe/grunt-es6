@@ -16,6 +16,11 @@
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <title>Todos Application</title>
+    <style>
+      .trans {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div id="app">
@@ -33,6 +38,18 @@
 
     <div id="data"></div>
 
+    <div>
+      <span class="trans" key="todoLabel" value="Your Todos"></span>
+      <span
+        class="trans"
+        key="placeHolder"
+        value="Add Something to do list"
+      ></span>
+      <span class="trans" key="addBtn" value="+"></span>
+      <span class="trans" key="moreBtn" value="Give me More...."></span>
+      <span class="trans" key="removeBtn" value="X"></span
+      ><span class="trans" key="Done" value="Done"></span>
+    </div>
     <script>
       $(function () {
         BootTodo({}, "app");
