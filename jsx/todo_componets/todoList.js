@@ -12,6 +12,10 @@ const TodoList = (props) => {
         {props.todos.map((x) => {
           return <Todo {...x} {...props} />;
         })}
+
+        {props.todos.map((todo) => {
+          return <div> todo.title</div>
+        })}
       </ul>
       <button onClick={initState.actions.More}>{i18n("moreBtn")}</button>
     </>
