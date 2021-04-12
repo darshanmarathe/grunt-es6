@@ -6,12 +6,17 @@ const initState = {
     todos: [],
     placeholderText: "Enter a todo and hit enter",
     page: 1,
-    pageSize: 3,
+    pageSize: 5,
+    ReachedMax : false,
+    loading: false
   },
   setState: function (obj, func = null) {
     this.state = { ...this.state, ...obj };
     console.log("setState after", this.state);
     BootTodo(this.state, "app");
+  },
+  setScrollEvent(){
+    document.addEventListener("scroll", actions.More);
   },
   transformToVM: function (data) {
     data.forEach((todo) => {

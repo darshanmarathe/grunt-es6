@@ -107,11 +107,12 @@ module.exports = function (grunt) {
         files: ["src/**/*.js", "jsx/**/*.js", "jsx/**/*.jsx"],
         tasks: ["babel", "browserify"],
       },
-    },
+    }
   });
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-babel");
   grunt.loadNpmTasks("grunt-browserify");
   grunt.loadNpmTasks("grunt-contrib-uglify");
+  grunt.loadNpmTasks("grunt-contrib-concat");
   grunt.registerTask("default", ["babel", "browserify"]);
 };

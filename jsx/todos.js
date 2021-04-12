@@ -11,6 +11,7 @@ export const BootTodo = (props, container = "root") => {
   if (initState.state.todos.length === 0) {
     FetchTodos().then((d) => {
       initState.state.todos = initState.transformToVM(d);
+      initState.setScrollEvent();
       document.getElementById(container).innerHTML = "";
       document
         .getElementById(container)

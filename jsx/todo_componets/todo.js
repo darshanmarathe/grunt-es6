@@ -19,7 +19,7 @@ const Todo = (props) => {
   }
 
   return (
-    <li>
+    <li class="todoItem">
       {props.done === true ? <del> {renderTodo()} </del> : renderTodo()}
      <br />
       {moment(props.date).format("MMM Do YY")}
@@ -49,7 +49,7 @@ const Todo = (props) => {
       )}
       <br />
       {props.desc != null && (
-        <div
+        <div class="desc"
           onBlur={(e) => {
             var todo = {
               id: props.id,
@@ -61,7 +61,7 @@ const Todo = (props) => {
           }}
           contentEditable="true"
           id={props.id + "div"}
-          style={{ display: props.isOpen ? "block" : "none" }}
+          // style={{ display: props.isOpen ? "block" : "none" }}
         >
           {props.desc}
         </div>

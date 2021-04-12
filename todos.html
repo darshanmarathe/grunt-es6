@@ -20,19 +20,34 @@
       .trans {
         display: none;
       }
+
+      .todoItem{
+        height: 120px;
+        width: 50%;
+        border: 1px solid black;
+        margin-bottom: 10px;
+        box-shadow: 2px 5px #888888;
+      }
+
+      .todoItem .desc{
+        display: block;
+        border: 1px dashed black;
+        width: 96%;
+        margin-left: 5px;
+        margin-right: 5px;
+        padding :5px;
+        min-height: 65px;
+        
+      }
     </style>
   </head>
   <body>
     <div id="app">
-      <h1>Todos (5)</h1>
+      <h1>Your Todos (0)</h1>
       <input type="text" placeholder="Please add todo and hit Enter." />
       <hr />
       <ul class="todos">
-        <li>Lorem ipsum dolor sit amet. <button>X</button></li>
-        <li>Est tempora veritatis maxime minima? <button>X</button></li>
-        <li>Consequatur sint iusto cupiditate ratione! <button>X</button></li>
-        <li>Natus eaque culpa neque reprehenderit! <button>X</button></li>
-        <li>Tenetur quod voluptas libero doloremque? <button>X</button></li>
+     <li>Loading.....</li>
       </ul>
     </div>
 

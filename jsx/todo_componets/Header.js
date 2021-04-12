@@ -9,7 +9,7 @@ const Header = (props) => {
 
   return (
     <>
-      <h1>{i18n('todoLabel')} {props.todos.length}</h1>
+      <h1>{i18n('todoLabel')} ({props.todos.length})</h1>
       <TodoInput
         placeholder={i18n('placeHolder')}
         {...props}

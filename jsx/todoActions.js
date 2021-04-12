@@ -102,10 +102,15 @@ const actions = {
     initState.setState({ todos: [...todos] });
   },
   More() {
-    let { page, pageSize, todos } = initState.state;
+    let { page, pageSize, todos , ReachedMax } = initState.state;
+    if(ReachedMax) return;
     page = page + 1;
+    initState.setState({loading : true})
     FetchTodos(page, pageSize).then((d) => {
-      initState.setState({ page, todos: [...todos, ...d] });
+      initState.setState({ page, 
+        todos: [...todos, ...d]  
+        , ReachedMax :d.length < pageSize 
+        , loading : false});
     });
   },
 };
