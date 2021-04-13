@@ -23,6 +23,35 @@ const Todo = (props) => {
       </div>
 
       <div class="controlsContainer">
+        <select value={props.status} style={{ marginTop: '5px' }} onChange={(e) => {
+          const todo = {
+            id: props.id,
+            status: e.target.value,
+            done: (e.target.value === "Done")
+          };
+          Done_Click(todo);
+        }}>
+          <option value={props.status}>{props.status}</option>
+          {initState.statuses.filter(x => x != props.status)
+            .map((x) => <option value={x}>{x}</option>)}
+        </select>
+        <button
+          onClick={(e) => {
+            Delete_Click(props);
+          }}
+        >
+          X
+        </button>
+        <button
+          onClick={(e) => {
+            // $("#" + props.id + "div").slideToggle();
+            // initState.actions.HandleOpenClose(props);
+            Handle_Popup("todoItem" + props.id)
+          }}
+        >
+          ...
+          </button>
+
         <span class="dateContainer">
           {moment(props.date).format("Do MMM YYYY")}
         </span>
@@ -96,55 +125,25 @@ const Todo = (props) => {
       {props.done === true ? <del> {renderTodo()} </del> : renderTodo()}
 
       <div id={"todo_" + props.id} style={{ display: props.isOpen ? "block" : "none" }}>
-        <select value={props.status} onChange={(e) => {
-          const todo = {
-            id: props.id,
-            status: e.target.value,
-            done: (e.target.value === "Done")
-          };
-          Done_Click(todo);
-        }}>
-          <option value={props.status}>{props.status}</option>
-          {["Not Started", "Work in Progress", "Stuck", "Done"]
-            .filter(x => x != props.status)
-            .map((x) => <option value={x}>{x}</option>)}
-        </select>
-        <button
-          onClick={(e) => {
-            Delete_Click(props);
+        <br />
+        <br />
+
+        <div class="desc"
+          onBlur={(e) => {
+            var todo = {
+              id: props.id,
+              desc: e.target.innerHTML,
+              isOpen: true,
+            };
+
+            initState.actions.HandleChange(todo);
           }}
+          contentEditable="true"
+          id={props.id + "div"}
+
         >
-          X
-        </button>
-        {props.desc != null && (
-          <button
-            onClick={(e) => {
-              // $("#" + props.id + "div").slideToggle();
-              // initState.actions.HandleOpenClose(props);
-              Handle_Popup("todoItem" + props.id)
-            }}
-          >
-            ...
-          </button>
-        )}
-        {props.desc != null && (
-          <div class="desc"
-            onBlur={(e) => {
-              var todo = {
-                id: props.id,
-                desc: e.target.innerHTML,
-                isOpen: true,
-              };
-
-              initState.actions.HandleChange(todo);
-            }}
-            contentEditable="true"
-            id={props.id + "div"}
-
-          >
-            {props.desc}
-          </div>
-        )}
+          {props.desc}
+        </div>
 
       </div>
     </div>

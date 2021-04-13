@@ -10,6 +10,7 @@ const initState = {
     ReachedMax: false,
     loading: false
   },
+  statuses: ["Not Started", "Work in Progress", "Stuck", "Testing", "Done"],
   setState: function (obj, func = null) {
     this.state = { ...this.state, ...obj };
     console.log("setState after", this.state);

@@ -24,6 +24,7 @@ const actions = {
     obj.id = todo.id;
     obj.status = todo.status;
     obj.done = todo.done;
+    obj.isOpen = false;
     var settings = {
       url: "http://localhost:3000/todos/" + todo.id,
       method: "PUT",
@@ -69,6 +70,14 @@ const actions = {
       initState.setState({ todos: [...todos] });
     });
   },
+  getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  },
   HandleAdd(e) {
     var obj = {};
     obj.title = e.str;
@@ -76,6 +85,7 @@ const actions = {
     obj.desc = "";
     obj.date = e.date;
     obj.status = "Not Started";
+    obj.color = this.getRandomColor();
     console.log(obj);
     var settings = {
       url: "http://localhost:3000/todos",

@@ -7,30 +7,41 @@ const i18n = initState.translations();
 const TodoList = (props) => {
   let { ReachedMax, page, pageSize, loading } = initState.state;
   return (
-   <>
-   <div class="parent">
-      {props.todos.map((x) => {
-        return <Todo {...x} {...props} />;
-      })}
-      
-    </div>
-    <div>
-    <br />
-    <p>Done : {ReachedMax.toString()} PageNo : {page} , PageSize: {pageSize} Records: {props.todos.length}</p>
+    <>
+      <div class="parent">
 
-    {loading && <div>Loading..... <Loading /> </div>}
-    <br />
-    {
-      initState.state.ReachedMax ?
-        <button
-          disabled={initState.ReachedMax}
-          onClick={initState.actions.More}>{i18n("moreBtn")}</button>
-        :
-        <button
-          onClick={initState.actions.More}>{i18n("moreBtn")}</button>
+        {
+          initState.statuses.map((x) => {
+            return <div style={{ width: '100%' }}>
+              <h4>{x}</h4>
+              {props.todos.filter((t) => t.status === x).map((ft) => {
+                return <Todo {...ft} {...props} />;
+              })}
 
-    }
-    </div>
+            </div>
+
+          })
+        }
+
+
+      </div>
+      <div>
+        <br />
+        <p>Done : {ReachedMax.toString()} PageNo : {page} , PageSize: {pageSize} Records: {props.todos.length}</p>
+
+        {loading && <div>Loading..... <Loading /> </div>}
+        <br />
+        {
+          initState.state.ReachedMax ?
+            <button
+              disabled={initState.ReachedMax}
+              onClick={initState.actions.More}>{i18n("moreBtn")}</button>
+            :
+            <button
+              onClick={initState.actions.More}>{i18n("moreBtn")}</button>
+
+        }
+      </div>
     </>
   );
 };

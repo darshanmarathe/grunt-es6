@@ -6,7 +6,23 @@ const PeopleLookUp = (props) => {
   return <div>
     <h1>{props.title}</h1>
     <hr />
-    <p>{props.desc}</p>
+    <textarea style={{ width: '100%' }}
+      onChange={(e) => {
+        var todo = {
+          id: props.id,
+          desc: e.target.value
+        };
+
+        initState.actions.HandleChange(todo);
+      }}
+      contentEditable="true"
+      id={props.id + "div"}
+
+    >
+      {props.desc}
+    </textarea>
+
+
     <button class="btn" onClick={(e) => {
       props.done = true;
       props.status = "Done"
