@@ -1,165 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://polyfill.io/v3/polyfill.min.js"></script>
-    <link rel="stylesheet" href="./colorbox.css">
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
 
-    <script src="./src/jquery.colorbox-min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <title>Todos Application</title>
-    <style>
-      .trans {
-        display: none;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://polyfill.io/v3/polyfill.min.js"></script>
+  <link rel="stylesheet" href="./colorbox.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+  <script src="./src/jquery.colorbox-min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <title>Todos Application</title>
+  <style>
+    .trans {
+      display: none;
+    }
 
-          .parent {
+    .parent {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
     }
 
-      .todoItem{
-        flex: 1 1 30%;
-        height: 120px;
-        width: 33%;
-        border: 1px solid black;
-        margin: 10px;
-        
-      }
+    .hidden {
+      display: none;
+      width: 100%;
+    }
 
-      .todoItem .desc{
-        display: block;
-        border: 1px dashed black;
-        width: 96%;
-        margin-left: 5px;
-        margin-right: 5px;
-        padding :5px;
-        min-height: 40px;
-        
-      }
+    .todoItem {
+      flex: 1 1 98%;
+      width: 80%;
+      min-height: 30px;
+      border: 1px solid black;
+      margin-bottom: 6px;
+    }
 
-input[type=color] {
-    width: 15px;
-    height: 15px; 
-    border-radius: 50%;
-    overflow: hidden;
-    float: right;
-    margin:0 10px 10px 0;
-}
+    .todoItem:hover {
+      background-color: #f5f5f5;
+    }
 
+    .todoItem .desc {
+      display: block;
+      border: 1px dashed black;
+      width: 96%;
+      margin-left: 5px;
+      margin-right: 5px;
+      padding: 5px;
+      min-height: 40px;
 
+    }
 
-/* datepicker */
-
-
-.datepicker-toggle {
-  position: relative;
-  width: 18px;
-  height: 19px;
-  float:right;
-  margin:0 10px 10px 0;  
-}
-.datepicker-toggle-button {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border:1px dashed black;
-  /* //background-color: #888888; */
-  content: url("https://www.fourseasonskindergarten.co.nz/app/uploads/calendar-icon.svg");
-}
+    input[type=color] {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      overflow: hidden;
+      float: right;
+      margin: 0 10px 10px 0;
+    }
 
 
 
-.datepicker-input {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-.datepicker-input::-webkit-calendar-picker-indicator {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  
-}
+    /* datepicker */
 
-.dateContainer{
-  margin:0 5px 0 10px;  
-}
-/* end datepicker */
 
-input[type=color]::-webkit-color-swatch {
-  border: none;
-  border-radius: 50%;
-  padding: 0;
-}
+    .datepicker-toggle {
+      position: relative;
+      width: 18px;
+      height: 19px;
+      float: right;
+      margin: 5px 5px 0 10px;
 
-input[type=color]::-webkit-color-swatch-wrapper {
-    border: none;
-    border-radius: 50%;
-    padding: 0;
-}
+    }
 
-.titleDiv{
-  padding : 0 0 0 5px;
-  margin-top:5px;
-}
+    .datepicker-toggle-button {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border: 1px dashed black;
+      /* //background-color: #888888; */
+      content: url("https://www.fourseasonskindergarten.co.nz/app/uploads/calendar-icon.svg");
+    }
 
-    </style>
-  </head>
-  <body>
-    <div id="app">
-      <h1>Your Todos (0)</h1>
-      <input type="text" placeholder="Please add todo and hit Enter." />
-      <hr />
-      <ul class="todos">
-     <li>Loading.....</li>
-      </ul>
-    </div>
 
-    <div id="data"></div>
 
-    <div>
-      <span class="trans" key="todoLabel" value="Your Todos"></span>
-      <span
-        class="trans"
-        key="placeHolder"
-        value="Add Something to do list"
-      ></span>
-      <span class="trans" key="addBtn" value="+"></span>
-      <span class="trans" key="moreBtn" value="Give me More...."></span>
-      <span class="trans" key="removeBtn" value="X"></span
-      ><span class="trans" key="Done" value="Done"></span>
-    </div>
-    <script>
-      $(function () {
-        BootTodo({}, "app");
-      });
-    </script>
-    <script src="/dist/index.js"></script>
-  </body>
+    .datepicker-input {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    .datepicker-input::-webkit-calendar-picker-indicator {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .controlsContainer {
+      float: right;
+      width: 230px
+    }
+
+    .dateContainer {
+      margin: 5px 5px 0 10px;
+      float: right;
+    }
+
+    /* end datepicker */
+
+    input[type=color] {
+      margin: 5px 5px 0 10px;
+      float: right;
+    }
+
+    input[type=color]::-webkit-color-swatch {
+      border: none;
+      border-radius: 50%;
+      padding: 0;
+
+    }
+
+    input[type=color]::-webkit-color-swatch-wrapper {
+      border: none;
+      border-radius: 50%;
+      padding: 0;
+    }
+
+    .titleDiv {
+      padding: 0 0 0 5px;
+      margin-top: 5px;
+      width: 80%;
+      float: left;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h1>Your Todos (0)</h1>
+    <input type="text" placeholder="Please add todo and hit Enter." />
+    <hr />
+    <ul class="todos">
+      <li>Loading.....</li>
+    </ul>
+  </div>
+
+  <div id="data"></div>
+
+  <div>
+    <span class="trans" key="todoLabel" value="Your Todos"></span>
+    <span class="trans" key="placeHolder" value="Add Something to do list"></span>
+    <span class="trans" key="addBtn" value="+"></span>
+    <span class="trans" key="moreBtn" value="Give me More...."></span>
+    <span class="trans" key="removeBtn" value="X"></span><span class="trans" key="Done" value="Done"></span>
+  </div>
+  <script>
+    $(function () {
+      BootTodo({}, "app");
+    });
+  </script>
+  <script src="/dist/index.js"></script>
+</body>
+
 </html>

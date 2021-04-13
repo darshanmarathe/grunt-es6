@@ -6,16 +6,17 @@ const initState = {
     todos: [],
     placeholderText: "Enter a todo and hit enter",
     page: 1,
-    pageSize: 6,
-    ReachedMax : false,
+    pageSize: 4,
+    ReachedMax: false,
     loading: false
   },
   setState: function (obj, func = null) {
     this.state = { ...this.state, ...obj };
     console.log("setState after", this.state);
     BootTodo(this.state, "app");
+    if (func) func();
   },
-  setScrollEvent(){
+  setScrollEvent() {
     document.addEventListener("scroll", actions.More);
   },
   transformToVM: function (data) {
@@ -38,9 +39,9 @@ const initState = {
   },
   translations: function () {
     var translations = this.__translation;
-      return function(key , optValue = '') {
-        return translations[key] === undefined ? (optValue === '' ? key : optValue) : translations[key] 
-      }
+    return function (key, optValue = '') {
+      return translations[key] === undefined ? (optValue === '' ? key : optValue) : translations[key]
+    }
   },
   actions,
 };

@@ -94,6 +94,7 @@ const actions = {
   },
   HandleOpenClose(todo) {
     todo.isOpen = !todo.isOpen;
+    console.log(('#' + "todo_" + todo.id));
     let todos = initState.state.todos.map((x) => {
       if (x.id == todo.id) {
         return todo;
@@ -102,6 +103,7 @@ const actions = {
       }
     });
     initState.setState({ todos: [...todos] });
+
   },
   More() {
     let { page, pageSize, todos, ReachedMax } = initState.state;
