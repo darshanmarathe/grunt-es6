@@ -5,11 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://polyfill.io/v3/polyfill.min.js"></script>
+    <link rel="stylesheet" href="./colorbox.css">
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
+
+    <script src="./src/jquery.colorbox-min.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
@@ -21,12 +24,20 @@
         display: none;
       }
 
+
+          .parent {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
       .todoItem{
+        flex: 1 1 30%;
         height: 120px;
-        width: 50%;
+        width: 33%;
         border: 1px solid black;
-        margin-bottom: 10px;
-        box-shadow: 2px 5px #888888;
+        margin: 10px;
+        
       }
 
       .todoItem .desc{
@@ -36,9 +47,88 @@
         margin-left: 5px;
         margin-right: 5px;
         padding :5px;
-        min-height: 65px;
+        min-height: 40px;
         
       }
+
+input[type=color] {
+    width: 15px;
+    height: 15px; 
+    border-radius: 50%;
+    overflow: hidden;
+    float: right;
+    margin:0 10px 10px 0;
+}
+
+
+
+/* datepicker */
+
+
+.datepicker-toggle {
+  position: relative;
+  width: 18px;
+  height: 19px;
+  float:right;
+  margin:0 10px 10px 0;  
+}
+.datepicker-toggle-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border:1px dashed black;
+  /* //background-color: #888888; */
+  content: url("https://www.fourseasonskindergarten.co.nz/app/uploads/calendar-icon.svg");
+}
+
+
+
+.datepicker-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.datepicker-input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  
+}
+
+.dateContainer{
+  margin:0 5px 0 10px;  
+}
+/* end datepicker */
+
+input[type=color]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+}
+
+input[type=color]::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+}
+
+.titleDiv{
+  padding : 0 0 0 5px;
+  margin-top:5px;
+}
+
     </style>
   </head>
   <body>

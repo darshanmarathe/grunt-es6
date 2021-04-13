@@ -6,7 +6,7 @@ const initState = {
     todos: [],
     placeholderText: "Enter a todo and hit enter",
     page: 1,
-    pageSize: 5,
+    pageSize: 6,
     ReachedMax : false,
     loading: false
   },

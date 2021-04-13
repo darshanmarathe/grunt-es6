@@ -19,11 +19,11 @@ const actions = {
     });
   },
 
-  HandleDone(todo) {
+  HandleStatus(todo) {
     var obj = {};
     obj.id = todo.id;
-    obj.done = !todo.done;
-    console.log(obj);
+    obj.status = todo.status;
+    obj.done = todo.done;
     var settings = {
       url: "http://localhost:3000/todos/" + todo.id,
       method: "PUT",
@@ -47,6 +47,7 @@ const actions = {
     });
   },
   HandleChange(todo) {
+    console.log(todo)
     var settings = {
       url: "http://localhost:3000/todos/" + todo.id,
       method: "PUT",
@@ -74,6 +75,7 @@ const actions = {
     obj.done = false;
     obj.desc = "";
     obj.date = e.date;
+    obj.status = "Not Started";
     console.log(obj);
     var settings = {
       url: "http://localhost:3000/todos",
@@ -86,7 +88,7 @@ const actions = {
     };
 
     $.ajax(settings).done((response) => {
-      initState.setState({ todos: [...initState.state.todos, response] });
+      initState.setState({ todos: [response, ...initState.state.todos] });
       toastr.success("saved....");
     });
   },
@@ -102,15 +104,17 @@ const actions = {
     initState.setState({ todos: [...todos] });
   },
   More() {
-    let { page, pageSize, todos , ReachedMax } = initState.state;
-    if(ReachedMax) return;
+    let { page, pageSize, todos, ReachedMax } = initState.state;
+    if (ReachedMax || initState.state.loading) return;
     page = page + 1;
-    initState.setState({loading : true})
+    initState.setState({ loading: true })
     FetchTodos(page, pageSize).then((d) => {
-      initState.setState({ page, 
-        todos: [...todos, ...d]  
-        , ReachedMax :d.length < pageSize 
-        , loading : false});
+      initState.setState({
+        page,
+        todos: [...todos, ...d]
+        , ReachedMax: d.length < pageSize
+        , loading: false
+      });
     });
   },
 };
