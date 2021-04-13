@@ -113,7 +113,7 @@ const Todo = (props) => {
     initState.actions.HandleStatus(todo);
   }
 
-  let shadow = '5px 0px ' + (props.color || 'black');
+  let shadow = '5px 1px ' + (props.color || 'black');
   //style={{ 'box-shadow': shadow }}
   return (
     <div class="todoItem" style={{ boxShadow: shadow }} id={"todoItem" + props.id} onMouseOver={((e) => {
