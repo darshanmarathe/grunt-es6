@@ -1,5 +1,6 @@
 import { dom, Fragment } from "../mact/index.js";
 
+import { rc, mh } from "./rc.js"
 import { Todo, Loading } from "./index";
 import initState from "./initialstate.js";
 const i18n = initState.translations();
@@ -15,7 +16,7 @@ const TodoList = (props) => {
             return <div style={{ width: '100%' }}>
               <h4>{x}</h4>
               {props.todos.filter((t) => t.status === x).map((ft) => {
-                return <Todo {...ft} {...props} />;
+                return rc(ft, true) ? <Todo {...ft} {...props} /> : null
               })}
 
             </div>
