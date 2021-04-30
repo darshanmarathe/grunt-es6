@@ -1,7 +1,7 @@
 import { dom, Fragment } from "../mact/index.js";
 
 import moment from "moment";
-import { initState } from "./index";
+import { initState } from "./index.js";
 // TodoInput Component
 
 function parsestring(str) {

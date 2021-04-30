@@ -1,4 +1,4 @@
-import dom from './dom'
+import dom from './dom.js'
 
 function updateElement(parent, next, prev) {
   // later virtualDOM mods

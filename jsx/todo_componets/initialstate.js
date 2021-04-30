@@ -1,4 +1,4 @@
-import actions from "../todoActions";
+import actions from "../todoActions.js";
 
 const initState = {
   __translation: {},

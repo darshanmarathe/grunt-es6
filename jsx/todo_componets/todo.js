@@ -1,6 +1,6 @@
 import { dom, Fragment, memoize } from "../mact/index.js";
 import moment from "moment";
-import { initState, TaskFlyOut } from "./index";
+import { initState, TaskFlyOut } from "./index.js";
 import { HOC, UserComponent } from "./Hoc.js";
 
 // Todo Component

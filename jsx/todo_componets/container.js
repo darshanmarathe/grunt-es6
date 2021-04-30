@@ -1,7 +1,7 @@
 import { dom, Fragment } from "../mact/index.js";
-import { initState } from "./index";
+import { initState } from "./index.js";
 
-import { Header, TodoList } from "./index";
+import { Header, TodoList } from "./index.js";
 // Container Component
 function Container(props) {
   initState.state = { ...initState.state, ...props };

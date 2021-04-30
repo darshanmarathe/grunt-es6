@@ -1,13 +1,13 @@
-import Header from "./Header";
-import TodoInput from "./TodoInput";
-import Todo from "./todo";
-import TodoList from "./todoList";
-import Container from "./container";
-import Laoding from './loading'
-import initState from "./initialstate";
-import PeopleLookUp from "./peopleLookup";
+import Header from "./Header.js";
+import TodoInput from "./TodoInput.js";
+import Todo from "./todo.js";
+import TodoList from "./todoList.js";
+import Container from "./container.js";
+import Laoding from './loading.js'
+import initState from "./initialstate.js";
+import PeopleLookUp from "./peopleLookup.js";
 
 
-import TaskFlyOut from "./taskFlyout";
+import TaskFlyOut from "./taskFlyout.js";
 
 export { Header, Laoding, TodoInput, Todo, TodoList, Container, TaskFlyOut, PeopleLookUp, initState };

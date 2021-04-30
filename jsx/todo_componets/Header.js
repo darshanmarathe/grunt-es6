@@ -1,6 +1,6 @@
 import { dom, Fragment } from "../mact/index.js";
 
-import { TodoInput } from "./Index";
+import { TodoInput } from "./Index.js";
 import initState from "./initialstate.js";
 const i18n = initState.translations()
 

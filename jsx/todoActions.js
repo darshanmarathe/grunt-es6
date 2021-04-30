@@ -1,11 +1,11 @@
-import { initState } from "./todo_componets/index";
+import { initState } from "./todo_componets/index.js";
 
-import FetchTodos from "./todo_componets/api";
+import FetchTodos from "./todo_componets/api.js";
 
 const actions = {
   HandleDelete(id) {
     var settings = {
-      url: "http://nodeapi.foxteam.in/todos/" + id,
+      url: "http://localhost:3000/todos/" + id,
       method: "DELETE",
       timeout: 0,
       headers: {
@@ -26,7 +26,7 @@ const actions = {
     obj.done = todo.done;
     obj.isOpen = false;
     var settings = {
-      url: "http://nodeapi.foxteam.in/todos/" + todo.id,
+      url: "http://localhost:3000/todos/" + todo.id,
       method: "PUT",
       timeout: 0,
       headers: {
@@ -50,7 +50,7 @@ const actions = {
   HandleChange(todo) {
     console.log(todo)
     var settings = {
-      url: "http://nodeapi.foxteam.in/todos/" + todo.id,
+      url: "http://localhost:3000/todos/" + todo.id,
       method: "PUT",
       timeout: 0,
       headers: {
@@ -88,7 +88,7 @@ const actions = {
     obj.color = this.getRandomColor();
     console.log(obj);
     var settings = {
-      url: "http://nodeapi.foxteam.in/todos",
+      url: "http://localhost:3000/todos",
       method: "POST",
       timeout: 0,
       headers: {

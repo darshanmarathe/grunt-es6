@@ -1,4 +1,4 @@
-import synteticEvents from './synteticEvents'
+import synteticEvents from './synteticEvents.js'
 
 class JSXComponent {
   constructor(props = {}) {

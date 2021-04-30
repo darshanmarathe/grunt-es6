@@ -1,4 +1,4 @@
-import dom, { Fragment, portalCreator } from './dom'
+import dom, { Fragment, portalCreator } from './dom.js'
 
 const jsx = {
   dom,

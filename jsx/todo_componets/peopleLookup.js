@@ -1,5 +1,5 @@
 import { dom } from "../mact/index.js";
-import { initState } from "./index";
+import { initState } from "./index.js";
 
 const PeopleLookUp = (props) => {
 

@@ -1,7 +1,7 @@
 import { dom, Fragment } from "../mact/index.js";
 
 import { rc, mh } from "./rc.js"
-import { Todo, Loading } from "./index";
+import { Todo, Loading } from "./index.js";
 import initState from "./initialstate.js";
 const i18n = initState.translations();
 // TodoList Component

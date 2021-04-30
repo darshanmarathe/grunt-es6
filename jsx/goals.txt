@@ -1,5 +1,0 @@
-css class = Done
-JQuery  = Done 
-Better functions and setstate 
-diff 
-Santization 

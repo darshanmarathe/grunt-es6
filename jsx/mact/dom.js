@@ -1,5 +1,5 @@
-import synteticEvents from './synteticEvents'
-import { isSVG, createFragmentFrom } from './utils'
+import synteticEvents from './synteticEvents.js'
+import { isSVG, createFragmentFrom } from './utils.js'
 
 /**
  * The tag name and create an html together with the attributes

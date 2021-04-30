@@ -1,45 +1,52 @@
-const babelify = require("babelify");
 module.exports = function (grunt) {
   "use strict";
 
   grunt.initConfig({
     babel: {
-      options: {
-        sourceMap: "both",
-      },
-      dist: {
+      es5: {
+        options: {
+          sourceMap: "both",
+        },
         files: [
           {
             expand: true,
             cwd: "jsx/",
             src: ["**/*.js", "**/*.jsx"],
-            dest: "src/bundle",
+            dest: "src/bundle/",
+
           },
         ],
       },
-    },
-
-    babel2: {
-      options: {
-        sourceMap: false,
-        presets: [["@babel/preset-env", { modules: false }]],
-      },
-      dist: {
+      es6: {
+        options: {
+          sourceMap: "both",
+        },
         files: [
           {
             expand: true,
-            cwd: "../src/js/es6/",
-            src: ["*.js"],
-            dest: "../src/js/es6_converted/",
+            cwd: "jsx/",
+            src: ["**/*.js", "**/*.jsx"],
+            dest: "dist/es6_compiled",
           },
         ],
-      },
+      }
     },
+
+
     uglify: {
+      es6: {
+        options: {
+          compress: false,
+          sourceMap: false,
+        },
+        files: {
+          "./dist/es6.compiled.min.js": ["./dist/es6.compiled.js"],
+        },
+      },
       minify: {
         options: {
           compress: true,
-          sourceMap: false,
+          sourceMap: true,
         },
         files: {
           "./dist/index.min.js": ["./dist/index.js"],
@@ -48,14 +55,14 @@ module.exports = function (grunt) {
     },
 
     browserify: {
-      dist: {
+      es6: {
         files: [
           [
             {
               expand: true,
-              cwd: "./src",
+              cwd: "./dist/es6_compiled",
               src: ["*.js"],
-              dest: "./dist",
+              dest: "./dist/es6",
             },
           ],
         ],
@@ -67,18 +74,39 @@ module.exports = function (grunt) {
               {
                 sourceMaps: true,
                 babelrc: false,
-                presets: ["es2015", "stage-3"],
+                // presets: [
+                //   ["env",
+                //     {
+                //       "targets": {
+                //         "browsers": [
+                //           "chrome 92"
+                //         ]
+                //       }
+                //     }], "es2015", "stage-3"],
+                presets: [['@babel/preset-env' , {
+                        "targets": {
+                          "browsers": [
+                            "chrome 90"
+                          ]
+                        }
+                      }] ]
               },
             ],
           ],
-          plugin: [["minifyify", { map: false }]],
+          plugin: [["minifyify", { map: true }]],
         },
       },
-    },
-    browserify_org: {
-      production: {
-        src: ["./src/index.js"],
-        dest: "./dist/main.js",
+      es5: {
+        files: [
+          [
+            {
+              expand: true,
+              cwd: "./src/bundle/",
+              src: ["*.js"],
+              dest: "./dist/es5",
+            },
+          ],
+        ],
         options: {
           browserifyOptions: { debug: true },
           transform: [
@@ -86,20 +114,33 @@ module.exports = function (grunt) {
               "babelify",
               {
                 sourceMaps: true,
-                presets: ["es2015", "stage-3"],
+                babelrc: false,
+                presets: [ ["env",
+                {
+                  "targets": {
+                    "browsers": [
+                      "ie 11"
+                    ]
+                  }
+                }],"es2015", "stage-3"],
               },
             ],
           ],
-          plugin: [
-            // [
-            //   "factor-bundle",
-            //   {
-            //     outputs: ["./dist/index.js"],
-            //   },
-            // ],
-            ["minifyify", { map: false }],
-          ],
+          plugin: [["minifyify", { map: true }]],
         },
+      },
+    },
+    concat: {
+      options: {
+        separator: ';',
+      },
+      es5: {
+        src: ['./dist/es5/**.js'],
+        dest: './dist/es5/es5.compiled.js',
+      },
+      es6: {
+        src: ['./dist/es6/**.js'],
+        dest: './dist/es6/es6.compiled.js',
       },
     },
     watch: {
@@ -107,6 +148,15 @@ module.exports = function (grunt) {
         files: ["src/**/*.js", "jsx/**/*.js", "jsx/**/*.jsx"],
         tasks: ["babel", "browserify"],
       },
+    },
+
+    clean: {
+      es6: {
+        src: ['dist/es6_compiled']
+      },
+      es5: {
+        src: ["src/bundle/"]
+      }
     }
   });
   grunt.loadNpmTasks("grunt-contrib-watch");
@@ -114,5 +164,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-browserify");
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-contrib-concat");
-  grunt.registerTask("default", ["babel", "browserify"]);
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.registerTask("es6", ["babel:es6", "browserify:es6", "clean:es6", "concat:es6"]);
+  grunt.registerTask("es5", ["babel:es5", "browserify:es5", "clean:es5", "concat:es5"]);
+  grunt.registerTask("default", ["es6", "es5"]);
 };

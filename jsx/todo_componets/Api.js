@@ -1,7 +1,7 @@
-import initState  from './initialstate'
+import initState  from './initialstate.js'
 
 function FetchTodos(page = 1, pageSize = initState.state.pageSize) {
-  const url = `http://nodeApi.foxteam.in/todos?_page=${page}&_pageSize=${pageSize}`;
+  const url = `http://localhost:3000/todos?_page=${page}&_pageSize=${pageSize}`;
   return new Promise((resolve, reject) => {
   setTimeout(() => {
     $.get(url).then((d) => {
