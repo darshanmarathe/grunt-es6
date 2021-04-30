@@ -19,7 +19,7 @@ module.exports = function (grunt) {
       },
       es6: {
         options: {
-          sourceMap: "both",
+          //sourceMap: "both",
         },
         files: [
           {
@@ -36,20 +36,20 @@ module.exports = function (grunt) {
     uglify: {
       es6: {
         options: {
-          compress: false,
+          compress: true,
           sourceMap: false,
         },
         files: {
-          "./dist/es6.compiled.min.js": ["./dist/es6.compiled.js"],
+          "./dist/es6.compiled.min.js": ["./dist/es6/es6.compiled.js"],
         },
       },
-      minify: {
+      es5: {
         options: {
           compress: true,
           sourceMap: true,
         },
         files: {
-          "./dist/index.min.js": ["./dist/index.js"],
+          "./dist/es5.compiled.min.js": ["./dist/es5/es5.compiled.js"],
         },
       },
     },
@@ -67,33 +67,28 @@ module.exports = function (grunt) {
           ],
         ],
         options: {
-          browserifyOptions: { debug: true },
+          browserifyOptions: { debug: false },
           transform: [
             [
               "babelify",
               {
-                sourceMaps: true,
+                sourceMaps: false,
                 babelrc: false,
-                // presets: [
-                //   ["env",
-                //     {
-                //       "targets": {
-                //         "browsers": [
-                //           "chrome 92"
-                //         ]
-                //       }
-                //     }], "es2015", "stage-3"],
-                presets: [['@babel/preset-env' , {
-                        "targets": {
-                          "browsers": [
-                            "chrome 90"
-                          ]
-                        }
-                      }] ]
+                presets: [
+                  ["env",
+                    {
+                      "targets": {
+                        "browsers": [
+                          "chrome 90"
+                        ]
+                      },
+                      "useBuiltIns": "usage",
+                    }], "es2015", "stage-3"],
+              
               },
             ],
           ],
-          plugin: [["minifyify", { map: true }]],
+         // plugin: [["minifyify", { map: true }]],
         },
       },
       es5: {
@@ -113,20 +108,13 @@ module.exports = function (grunt) {
             [
               "babelify",
               {
-                sourceMaps: true,
+                sourceMaps: false,
                 babelrc: false,
-                presets: [ ["env",
-                {
-                  "targets": {
-                    "browsers": [
-                      "ie 11"
-                    ]
-                  }
-                }],"es2015", "stage-3"],
+                presets: ["es2015", "stage-3"],
               },
             ],
           ],
-          plugin: [["minifyify", { map: true }]],
+          plugin: [["minifyify", { map: false }]],
         },
       },
     },
@@ -165,7 +153,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-contrib-concat");
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.registerTask("es6", ["babel:es6", "browserify:es6", "clean:es6", "concat:es6"]);
-  grunt.registerTask("es5", ["babel:es5", "browserify:es5", "clean:es5", "concat:es5"]);
+  grunt.registerTask("es6", ["babel:es6", "browserify:es6", "clean:es6", "concat:es6" ,"uglify:es6"]);
+  grunt.registerTask("es5", ["babel:es5", "browserify:es5", "clean:es5", "concat:es5" ,"uglify:es5"]);
   grunt.registerTask("default", ["es6", "es5"]);
 };

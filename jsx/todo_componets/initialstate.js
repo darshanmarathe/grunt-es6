@@ -28,12 +28,12 @@ const initState = {
   },
   initTranslations: function (key) {
     if (Object.keys(this.__translation).length === 0) {
-      let translations = document.querySelectorAll('.trans')
+      let translations = $('.trans')
       console.log(translations);
-      translations.forEach(element => {
+      translations.each(element => {
         let key, value = "";
-        key = element.getAttribute('key');
-        value = element.getAttribute('value');
+        key = $(element).attr('key');
+        value = $(element).attr('value');
         this.__translation[key] = value;
       });;
     }
