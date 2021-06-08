@@ -32,28 +32,6 @@ module.exports = function (grunt) {
       }
     },
 
-
-    uglify: {
-      es6: {
-        options: {
-          compress: true,
-          sourceMap: false,
-        },
-        files: {
-          "./dist/es6.compiled.min.js": ["./dist/es6/es6.compiled.js"],
-        },
-      },
-      es5: {
-        options: {
-          compress: true,
-          sourceMap: true,
-        },
-        files: {
-          "./dist/es5.compiled.min.js": ["./dist/es5/es5.compiled.js"],
-        },
-      },
-    },
-
     browserify: {
       es6: {
         files: [
@@ -118,6 +96,7 @@ module.exports = function (grunt) {
         },
       },
     },
+
     concat: {
       options: {
         separator: ';',
@@ -131,29 +110,60 @@ module.exports = function (grunt) {
         dest: './dist/es6/es6.compiled.js',
       },
     },
+
+   
+
+    uglify: {
+      es6: {
+        options: {
+          compress: {
+            drop_console: true
+          },
+          sourceMap: false,
+        },
+        files: {
+          "./dist/es6.compiled.min.js": ["./dist/es6/es6.compiled.js"],
+        },
+      },
+      es5: {
+        options: {
+          compress: {
+            drop_console: true
+          },
+          sourceMap: false,
+        },
+        files: {
+          "./dist/es5.compiled.min.js": ["./dist/es5/es5.compiled.js"],
+        },
+      },
+    },
+   
+    clean: {
+      es6: {
+        src: ['dist/es6_compiled' ,'dist/es6']
+      },
+      es5: {
+        src: ["src/bundle/" ,'dist/es5']
+      }
+    },
+   
     watch: {
       scripts: {
         files: ["src/**/*.js", "jsx/**/*.js", "jsx/**/*.jsx"],
-        tasks: ["babel", "browserify"],
+        tasks: ["default"],
       },
     },
 
-    clean: {
-      es6: {
-        src: ['dist/es6_compiled']
-      },
-      es5: {
-        src: ["src/bundle/"]
-      }
-    }
+    
   });
   grunt.loadNpmTasks("grunt-contrib-watch");
-  grunt.loadNpmTasks("grunt-babel");
-  grunt.loadNpmTasks("grunt-browserify");
-  grunt.loadNpmTasks("grunt-contrib-uglify");
-  grunt.loadNpmTasks("grunt-contrib-concat");
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.registerTask("es6", ["babel:es6", "browserify:es6", "clean:es6", "concat:es6" ,"uglify:es6"]);
-  grunt.registerTask("es5", ["babel:es5", "browserify:es5", "clean:es5", "concat:es5" ,"uglify:es5"]);
+  grunt.loadNpmTasks("grunt-babel"); // ES 6 2015 2017 18 20  React to ES6
+  grunt.loadNpmTasks("grunt-browserify"); // Output of babel to browser specefic
+  grunt.loadNpmTasks("grunt-contrib-uglify"); // Out browserify and uglify
+  grunt.loadNpmTasks("grunt-contrib-concat"); // Take all file and makes into 1 file
+  grunt.loadNpmTasks('grunt-contrib-clean'); // clean 
+  grunt.registerTask("es6", ["babel:es6", "browserify:es6",  "concat:es6" ,"uglify:es6","clean:es6"]);
+  grunt.registerTask("es5", ["babel:es5", "browserify:es5", "concat:es5" ,"uglify:es5", "clean:es5"]);
   grunt.registerTask("default", ["es6", "es5"]);
 };
+  
